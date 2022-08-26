@@ -17,18 +17,14 @@ public class AccountServiceImp implements AccountService {
     private AccountRepository repository;
 
 
-
-
-
-
-
-
-    @SneakyThrows
-    @Override
-    public AccountDto getaccountbyId(String accountid) {
-        Account accountResult=repository.findById(accountid).orElseThrow(() -> new AccountNotFoundException("Account not found"));
-        return toDto(accountResult);
-
+ public List<AccountDto> getAccountDetails() {
+        List<Account> list= repository.findAll();
+        List<AccountDto> listdto =new ArrayList<AccountDto>(list.size());
+        for(Account account:list)
+        {
+            listdto.add(toDto(account));
+        }
+        return  listdto;
     }
 
 

@@ -18,12 +18,15 @@ public class AccountController {
     AccountService accountService;
 
 
+    @GetMapping("/customers/{customerId}/accounts")
+    public ResponseEntity<List<AccountDto>> getAccountdetails(@PathVariable String customerId, @RequestParam(defaultValue = "0") Integer page,
+                                                              @RequestParam(defaultValue = "10") Integer pageSize) {
+        List<AccountDto> accountdtoresult = accountService.getAccountDetails();
+        return new ResponseEntity<List<AccountDto>>(accountdtoresult, HttpStatus.OK);
+    }
 
-   @GetMapping("/customers/{customerId}/accounts/{accountId}")
-   public ResponseEntity<AccountDto> getaccountbtId(@PathVariable String customerId ,@PathVariable String accountId){
-        AccountDto result = accountService.getaccountbyId(accountId);
-        return new ResponseEntity<AccountDto>(result,HttpStatus.OK);
-   }
 
+
+  
 
 }
