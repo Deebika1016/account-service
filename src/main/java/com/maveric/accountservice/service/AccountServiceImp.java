@@ -9,13 +9,17 @@ import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountNotFoundException;
 
+
 import static com.maveric.accountservice.Methods.MapModelandDto.getCurrentDateTime;
+
+
 import static com.maveric.accountservice.Methods.MapModelandDto.toDto;
 
 @Service
 public class AccountServiceImp implements AccountService {
     @Autowired
     private AccountRepository repository;
+
 
 
 
@@ -34,6 +38,20 @@ public class AccountServiceImp implements AccountService {
         accountResult.setUpdatedAt(getCurrentDateTime());
         Account accountUpdated = repository.save(accountResult);
         return toDto(accountUpdated);
+    }
+
+
+
+
+
+ public List<AccountDto> getAccountDetails() {
+        List<Account> list= repository.findAll();
+        List<AccountDto> listdto =new ArrayList<AccountDto>(list.size());
+        for(Account account:list)
+        {
+            listdto.add(toDto(account));
+        }
+        return  listdto;
     }
 
 
