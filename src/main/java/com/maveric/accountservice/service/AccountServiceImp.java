@@ -44,15 +44,6 @@ public class AccountServiceImp implements AccountService {
 
 
 
- public List<AccountDto> getAccountDetails() {
-        List<Account> list= repository.findAll();
-        List<AccountDto> listdto =new ArrayList<AccountDto>(list.size());
-        for(Account account:list)
-        {
-            listdto.add(toDto(account));
-        }
-        return  listdto;
-    }
 
 
 
