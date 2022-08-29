@@ -17,15 +17,10 @@ public class AccountServiceImp implements AccountService {
     private AccountRepository repository;
 
 
- public List<AccountDto> getAccountDetails() {
-        List<Account> list= repository.findAll();
-        List<AccountDto> listdto =new ArrayList<AccountDto>(list.size());
-        for(Account account:list)
-        {
-            listdto.add(toDto(account));
-        }
-        return  listdto;
-    }
+    @Override
+    public List<Account> getAccountDetails() {
+
+        return repository.findAll();}
 
 
 }
