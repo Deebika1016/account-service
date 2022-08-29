@@ -1,17 +1,13 @@
 package com.maveric.accountservice.service;
 
-import com.maveric.accountservice.dto.AccountDto;
+
 import com.maveric.accountservice.model.Account;
 import com.maveric.accountservice.repository.AccountRepository;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.security.auth.login.AccountNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.maveric.accountservice.Methods.MapModelandDto.*;
+import static com.maveric.accountservice.Methods.Methods.*;
 
 @Service
 public class AccountServiceImp implements AccountService {
@@ -19,47 +15,35 @@ public class AccountServiceImp implements AccountService {
     private AccountRepository repository;
 
     @Override
-    public List<AccountDto> getAccountDetails() {
-        List<Account> list= repository.findAll();
-        List<AccountDto> listdto =new ArrayList<AccountDto>(list.size());
-        for(Account account:list)
-        {
-            listdto.add(toDto(account));
-        }
-        return  listdto;
+    public List<Account> getAccountDetails() {
+
+        return repository.findAll();}
+
+    @Override
+    public Account createAccount(Account account) {
+        account.setCreatedAt(getCurrentDateTime());
+        account.setUpdatedAt(getCurrentDateTime());
+
+        Account accountResult = repository.save(account);
+        return  accountResult;
     }
 
     @Override
-    public AccountDto createAccount(AccountDto accountDto) {
-        accountDto.setCreatedAt(getCurrentDateTime());
-        accountDto.setUpdatedAt(getCurrentDateTime());
-        Account account = null;
-        account.setCustomerId(accountDto.getCustomerId());
-        account.setType(accountDto.getType());
-//        Account account = toEntity(accountDto);
-//        Account accountResult = repository.save(account);
-        return  toDto(account);
-    }
-    @SneakyThrows
-    @Override
-    public AccountDto updateaccount(String accountId,AccountDto accountDto)
-    {
+    public Account upDateAccount(String accountId,Account account) throws AccountNotFoundException {
         Account accountResult=repository.findById(accountId).orElseThrow(() -> new AccountNotFoundException("Account not found"));
-       // Account accountResult=repository.findById(accountId).orElseThrow(() -> new AccountNotFoundException("Account not found"));
-        accountResult.setAccountId(accountResult.getAccountId());
-        accountResult.setCustomerId(accountDto.getCustomerId());
-        accountResult.setType(accountDto.getType());
-        accountResult.setCreatedAt(accountResult.getCreatedAt());
-        accountResult.setUpdatedAt(getCurrentDateTime());
-        Account accountUpdated = repository.save(accountResult);
-        return toDto(accountUpdated);
+       accountResult.setAccountId(account.getAccountId());
+       accountResult.setCustomerId(account.getCustomerId());
+       accountResult.setType(account.getType());
+       accountResult.setCreatedAt(account.getCreatedAt());
+       accountResult.setUpdatedAt(getCurrentDateTime());
+        return repository.save(accountResult);
     }
 
-    @SneakyThrows
+
     @Override
-    public AccountDto getaccountbyId(String accountid) {
+    public Account getAccountById(String accountid) throws AccountNotFoundException {
         Account accountResult=repository.findById(accountid).orElseThrow(() -> new AccountNotFoundException("Account not found"));
-        return toDto(accountResult);
+        return accountResult;
 
     }
 
