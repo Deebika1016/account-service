@@ -1,6 +1,6 @@
 package com.maveric.accountservice.service;
 
-import com.maveric.accountservice.dto.AccountDto;
+
 import com.maveric.accountservice.model.Account;
 import com.maveric.accountservice.repository.AccountRepository;
 import lombok.SneakyThrows;
@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.security.auth.login.AccountNotFoundException;
 
 
-import static com.maveric.accountservice.Methods.MapModelandDto.getCurrentDateTime;
-
-
-import static com.maveric.accountservice.Methods.MapModelandDto.toDto;
+import static com.maveric.accountservice.Methods.Methods.getCurrentDateTime;
 
 @Service
 public class AccountServiceImp implements AccountService {
@@ -22,22 +19,15 @@ public class AccountServiceImp implements AccountService {
 
 
 
-
-
-
-    @SneakyThrows
     @Override
-    public AccountDto updateaccount(String accountId,AccountDto accountDto)
-    {
+    public Account upDateAccount(String accountId, Account account) throws AccountNotFoundException {
         Account accountResult=repository.findById(accountId).orElseThrow(() -> new AccountNotFoundException("Account not found"));
-       // Account accountResult=repository.findById(accountId).orElseThrow(() -> new AccountNotFoundException("Account not found"));
-        accountResult.setAccountId(accountResult.getAccountId());
-        accountResult.setCustomerId(accountDto.getCustomerId());
-        accountResult.setType(accountDto.getType());
-        accountResult.setCreatedAt(accountResult.getCreatedAt());
+        accountResult.setAccountId(account.getAccountId());
+        accountResult.setCustomerId(account.getCustomerId());
+        accountResult.setType(account.getType());
+        accountResult.setCreatedAt(account.getCreatedAt());
         accountResult.setUpdatedAt(getCurrentDateTime());
-        Account accountUpdated = repository.save(accountResult);
-        return toDto(accountUpdated);
+        return repository.save(accountResult);
     }
 
 

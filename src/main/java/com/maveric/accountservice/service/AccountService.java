@@ -1,17 +1,14 @@
 package com.maveric.accountservice.service;
 
-import com.maveric.accountservice.dto.AccountDto;
+
+import com.maveric.accountservice.model.Account;
+import lombok.SneakyThrows;
+
+import javax.security.auth.login.AccountNotFoundException;
 
 public interface AccountService {
 
 
 
-
-   
-    public AccountDto updateaccount(String accountId,AccountDto accountDto);
-
-
-
-
-
+    Account upDateAccount(String accountId, Account account) throws AccountNotFoundException;
 }

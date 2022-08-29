@@ -1,6 +1,5 @@
 package com.maveric.accountservice.model;
 
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
