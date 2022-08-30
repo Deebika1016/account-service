@@ -1,10 +1,11 @@
 package com.maveric.accountservice.service;
 
 
-import com.maveric.accountservice.model.Account;
+
 import com.maveric.accountservice.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import static com.maveric.accountservice.Methods.MapModelandDto.toDto;
 import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 import static com.maveric.accountservice.Methods.Methods.*;
+
 
 
 @Service
@@ -56,6 +58,7 @@ public class AccountServiceImp implements AccountService {
     public Account getAccountById(String accountid) throws AccountNotFoundException {
         Account accountResult=repository.findById(accountid).orElseThrow(() -> new AccountNotFoundException("Account not found"));
         return accountResult;
+
 
 
 

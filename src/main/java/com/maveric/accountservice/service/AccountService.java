@@ -16,9 +16,10 @@ public interface AccountService {
     public Account createAccount(Account account);
     public Account getAccountById(String accountid) throws AccountNotFoundException;
     public Account upDateAccount(String accountId,Account account) throws AccountNotFoundException;
+
     public String deleteAccount(String accountId);
 
-    public Account createAccount(Account account);
+  
 
 
 }

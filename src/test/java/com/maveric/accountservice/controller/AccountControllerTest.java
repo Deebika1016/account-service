@@ -30,6 +30,12 @@ public class AccountControllerTest {
 
 
     @Test
+
+    void deleteAccount() throws Exception {
+
+        mvc.perform(delete("/api/v1/customers/" + "10" + "/accounts/" + "123").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())}
+@Test
     void shouldGetAccountsWhenRequestMadeToGetAccounts() throws Exception {
         mvc.perform(get("/api/v1/customers/" + "10" + "/accounts").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -52,6 +58,7 @@ public class AccountControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(map.writeValueAsBytes(account)))
                 .andExpect(status().isCreated())
+
                 .andDo(print());
 
     }

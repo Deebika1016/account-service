@@ -1,5 +1,5 @@
 package com.maveric.accountservice.service;
-import com.maveric.accountservice.Methods.Type;
+
 import com.maveric.accountservice.model.Account;
 import com.maveric.accountservice.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
@@ -7,14 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import javax.security.auth.login.AccountNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
-import static com.maveric.accountservice.Methods.Type.valueOf;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,6 +16,15 @@ public class AccountServiceImpTest {
     private AccountRepository accountRepository;
     @InjectMocks
     private AccountServiceImp accountService;
+
+
+    @Test
+    void shouldDeleteAccountWhenDeleteAccountInvoked(){
+
+        accountRepository.deleteById("123");
+        verify(accountRepository,atLeastOnce()).deleteById("123");
+    }
+
 
     @Test
     void shouldReturnAccountWhenCreateAccountInvoked() {
@@ -36,6 +38,7 @@ public class AccountServiceImpTest {
         assertNotNull(account);
         assertSame(account.getType(),getAccount().getType());
     }
+
 
 
     private Account getAccount() {
