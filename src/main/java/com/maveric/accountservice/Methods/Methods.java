@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Methods {
+
     public static String getCurrentDateTime() {
         Calendar cal = Calendar.getInstance();
         Date date=cal.getTime();
