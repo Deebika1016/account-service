@@ -17,16 +17,13 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
-    @GetMapping("/customers/{customerId}/accounts")
-    public ResponseEntity<List<Account>> getAccountdetails(@PathVariable String customerId, @RequestParam(defaultValue = "0") Integer page,
-                                                           @RequestParam(defaultValue = "10") Integer pageSize) {
 
-  
    @PostMapping("/customers/{customerId}/accounts")
    public ResponseEntity<Account> createAccount(@PathVariable String customerId, @RequestBody Account account) {
        Account accountdtoresult = accountService.createAccount(account);
        return new ResponseEntity<Account>(accountdtoresult, HttpStatus.CREATED);
    }
+
    @GetMapping("/customers/{customerId}/accounts/{accountId}")
    public ResponseEntity<Account> getaccountbtId(@PathVariable String customerId ,@PathVariable String accountId) throws AccountNotFoundException {
         Account result = accountService.getAccountById(accountId);
@@ -50,3 +47,4 @@ public class AccountController {
   
 
 }
+
