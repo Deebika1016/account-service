@@ -29,6 +29,16 @@ public class AccountControllerTest {
 
 
 
+    @Test
+    void shouldGetAccountsWhenRequestMadeToGetAccounts() throws Exception {
+        mvc.perform(get("/api/v1/customers/" + "10" + "/accounts").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+    }
+
+
+    
 
     @Test
     void createAccount() throws Exception {
@@ -47,4 +57,5 @@ public class AccountControllerTest {
     }
 
 }
+
 
