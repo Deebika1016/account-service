@@ -36,42 +36,6 @@ public class AccountServiceImpTest {
         assertNotNull(account);
         assertSame(account.getType(),getAccount().getType());
     }
-    @Test
-    void shouldReturnAccountWhenGetAccountByIdInvoked() throws AccountNotFoundException {
-
-        when(accountRepository.findById(any(String.class))).thenReturn(Optional.of(getAccount()));
-
-
-        Account account = accountService.getAccountById("123");
-
-
-        assertNotNull(account);
-        assertSame(account.getType(),getAccount().getType());
-
-    }
-
-    @Test
-    void shouldDeleteAccountWhenDeleteAccountInvoked(){
-
-        accountRepository.deleteById("123");
-        verify(accountRepository,atLeastOnce()).deleteById("123");
-    }
-    @Test
-    void shouldReturnAccountsWhenAccountsNotEmptyInDb(){
-        List<Account> account = new ArrayList<Account>();
-        account.add(getAccount());
-        when(accountRepository.findAll()).thenReturn(account);
-        assertFalse(accountService.getAccountDetails().isEmpty());
-
-    }
-    @Test
-    void shouldReturnUpdateAccountwhenUpdateAccountInvoke() throws AccountNotFoundException {
-        when(accountRepository.findById(any(String.class))).thenReturn(Optional.of(getAccount()));
-        when(accountRepository.save(any())).thenReturn(getAccount());
-        Account account=accountService.upDateAccount("123",getAccount());
-        assertNotNull(account);
-        assertSame(account.getType(),getAccount().getType());
-    }
 
 
     private Account getAccount() {
